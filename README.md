@@ -2,6 +2,9 @@
 
 > 从被动执行到价值共创：12周高维职场进阶实战手册与在线学习系统。
 
+🔗 **在线访问地址 (GitHub Pages)**: [https://hsthanb4.github.io/upward-management-course/](https://hsthanb4.github.io/upward-management-course/)  
+📦 **GitHub 仓库**: [https://github.com/hsthanb4/upward-management-course](https://github.com/hsthanb4/upward-management-course)
+
 基于互联网大厂 OKR/KPI 实战协同场景，解构“帮上级成功 = 帮自己成功”的商业本质，破解职场人“献媚、盲从、对抗”三大心智误区，提供开箱即用的大厂生存与晋升工具包。
 
 ---
