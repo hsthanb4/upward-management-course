@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>互联网大厂向上管理课程体系 | 12周能力进阶实战手册</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="css/custom.css">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#eff6ff',
+              100: '#dbeafe',
+              500: '#3b82f6',
+              600: '#2563eb',
+              700: '#1d4ed8',
+              800: '#1e40af',
+              900: '#1e3a8a',
+            }
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col selection:bg-blue-500 selection:text-white">
+
+  <!-- 顶部全局导航 -->
+  <header class="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
+      
+      <!-- Logo 与 标题 -->
+      <a href="#" class="flex items-center gap-2.5 group">
+        <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-600 flex items-center justify-center text-white shadow-md shadow-blue-500/20 group-hover:scale-105 transition-transform">
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+          </svg>
+        </div>
+        <div>
+          <span class="text-sm font-extrabold text-slate-900 tracking-tight block leading-none">向上管理 MASTERCLASS</span>
+          <span class="text-[10px] text-slate-400 font-medium">互联网大厂 12 周高维实战</span>
+        </div>
+      </a>
+
+      <!-- 快速导航 -->
+      <nav class="hidden md:flex items-center gap-6 text-xs font-semibold text-slate-600">
+        <a href="#overview" class="hover:text-blue-600 transition-colors">课程总览</a>
+        <a href="#structure" class="hover:text-blue-600 transition-colors">课时架构</a>
+        <a href="#curriculum" class="hover:text-blue-600 transition-colors">12周全景课表</a>
+        <a href="#toolkits" class="hover:text-blue-600 transition-colors">实操工具箱</a>
+        <a href="#pyramid" class="hover:text-blue-600 transition-colors">能力4级模型</a>
+      </nav>
+
+      <!-- 学习打卡进度胶囊 + 原图对照 + 打印 -->
+      <div class="flex items-center gap-3">
+        <!-- 原图对照按钮 -->
+        <button onclick="openConceptGallery()" class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-700 text-[11px] font-bold border border-slate-200 transition-colors" title="查看原始向上管理概念设计大图">
+          <svg class="w-3.5 h-3.5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+          </svg>
+          <span>概念原图</span>
+        </button>
+
+        <!-- 打卡进度 -->
+        <div class="hidden sm:flex items-center gap-2 bg-slate-100 hover:bg-slate-200/80 px-3 py-1.5 rounded-full border border-slate-200 transition-colors cursor-pointer" onclick="document.getElementById('curriculum').scrollIntoView({behavior: 'smooth'})" title="已完成的课程周次进度">
+          <span class="text-[11px] font-bold text-slate-700">打卡进度</span>
+          <div class="w-16 h-2 bg-slate-200 rounded-full overflow-hidden">
+            <div id="progress-fill" class="h-full bg-emerald-500 rounded-full transition-all duration-300" style="width: 0%"></div>
+          </div>
+          <span id="progress-count" class="text-[11px] font-mono font-bold text-emerald-600">0/12</span>
+        </div>
+
+        <!-- 打印/导出 -->
+        <button onclick="window.print()" class="p-2 text-slate-500 hover:text-slate-800 hover:bg-slate-100 rounded-lg transition-colors" title="打印/导出为PDF">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
+          </svg>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- 主体容器 -->
+  <main class="flex-1">
+
+    <!-- Hero 核心大 Banner -->
+    <section id="overview" class="relative overflow-hidden bg-white border-b border-slate-200 py-12 md:py-16">
+      <div class="absolute inset-0 bg-[radial-gradient(#e2e8f0_1px,transparent_1px)] [background-size:16px_16px] opacity-40 pointer-events-none"></div>
+      
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+        <div class="max-w-3xl">
+          
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 border border-blue-200 text-blue-700 text-xs font-semibold mb-4">
+            <span class="flex h-2 w-2 rounded-full bg-blue-600 animate-pulse"></span>
+            互联网大厂向上管理课程体系 · 官方标准教案
+          </div>
+
+          <h1 class="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 tracking-tight leading-tight">
+            从被动执行到价值共创<br>
+            <span class="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600">
+              12周高维职场进阶实战
+            </span>
+          </h1>
+
+          <p class="mt-4 text-sm sm:text-base text-slate-600 leading-relaxed">
+            大厂商业本质：<strong class="text-slate-900">帮上级成功 = 帮自己成功</strong>。打破“献媚、盲从、对抗”三大致命心智误区，建立以<span class="underline decoration-blue-500 decoration-2 font-semibold">信任账户</span>、<span class="underline decoration-emerald-500 decoration-2 font-semibold">四维识人</span>、<span class="underline decoration-amber-500 decoration-2 font-semibold">高效汇报</span>、<span class="underline decoration-orange-500 decoration-2 font-semibold">期望边界</span>与<span class="underline decoration-purple-500 decoration-2 font-semibold">高维述职</span>为支柱的大厂终身护城河。
+          </p>
+
+          <!-- 3个月阶梯阶段指示卡片 -->
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-8">
+            
+            <div class="p-3.5 rounded-xl bg-blue-50/70 border border-blue-200 flex items-center gap-3">
+              <span class="w-8 h-8 rounded-lg bg-blue-600 text-white font-black text-sm flex items-center justify-center shrink-0">1</span>
+              <div>
+                <div class="text-xs font-black text-blue-950">第1月：认知与读懂</div>
+                <div class="text-[11px] text-blue-700 font-medium">“先看清楚，再动手”</div>
+              </div>
+            </div>
+
+            <div class="p-3.5 rounded-xl bg-amber-50/70 border border-amber-200 flex items-center gap-3">
+              <span class="w-8 h-8 rounded-lg bg-amber-700 text-white font-black text-sm flex items-center justify-center shrink-0">2</span>
+              <div>
+                <div class="text-xs font-black text-amber-950">第2月：沟通与边界</div>
+                <div class="text-[11px] text-amber-800 font-medium">“会说话，守边界”</div>
+              </div>
+            </div>
+
+            <div class="p-3.5 rounded-xl bg-purple-50/70 border border-purple-200 flex items-center gap-3">
+              <span class="w-8 h-8 rounded-lg bg-purple-600 text-white font-black text-sm flex items-center justify-center shrink-0">3</span>
+              <div>
+                <div class="text-xs font-black text-purple-950">第3月：价值与晋升</div>
+                <div class="text-[11px] text-purple-700 font-medium">“让价值被看见”</div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- 快捷操作按钮 -->
+          <div class="flex flex-wrap items-center gap-3 mt-6">
+            <a href="#curriculum" class="px-5 py-2.5 rounded-xl bg-slate-900 text-white text-xs font-bold shadow-md hover:bg-slate-800 transition-all flex items-center gap-1.5">
+              <span>探索12周完整大纲</span>
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </a>
+            <a href="#toolkits" onclick="switchToolTab('quiz')" class="px-5 py-2.5 rounded-xl bg-white border border-slate-300 text-slate-700 text-xs font-bold hover:bg-slate-50 transition-all flex items-center gap-1.5">
+              <span>10分钟向上管理自测</span>
+              <span class="text-[10px] bg-red-500 text-white px-1.5 py-0.2 rounded-full font-bold">HOT</span>
+            </a>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- 课程设计说明看板（模块分布 + 60分钟结构）（还原原图 4/5） -->
+    <section id="structure" class="py-12 bg-slate-50 border-b border-slate-200">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="text-center max-w-2xl mx-auto mb-10">
+          <span class="text-xs font-bold text-blue-600 uppercase tracking-widest">Architecture & Schedule</span>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-1">课程设计说明</h2>
+          <p class="text-xs sm:text-sm text-slate-500 mt-1.5">4/5 · 互联网大厂向上管理课程标准规划</p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+          
+          <!-- 左侧：模块课时分布 -->
+          <div class="bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 shadow-xs">
+            <div class="flex items-center justify-between mb-5">
+              <h3 class="text-base font-bold text-slate-900 flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-blue-600"></span>
+                模块课时分布
+              </h3>
+              <span class="text-xs text-slate-400 font-mono">Total: 12 Weeks · 12 Hours</span>
+            </div>
+
+            <!-- 彩色占比条形色块（还原原图顶端 M1~M6 色块条） -->
+            <div class="grid grid-cols-6 h-9 rounded-xl overflow-hidden font-mono text-[11px] font-black text-white text-center shadow-inner mb-6">
+              <div class="bg-blue-600 flex items-center justify-center" title="M1 认知破局 (8%)">M1</div>
+              <div class="bg-emerald-600 flex items-center justify-center" title="M2 读懂上级 (17%)">M2</div>
+              <div class="bg-amber-700 flex items-center justify-center col-span-2" title="M3 汇报沟通 (33% 重心)">M3</div>
+              <div class="bg-orange-700 flex items-center justify-center" title="M4 期望边界 (17%)">M4</div>
+              <div class="bg-purple-600 flex items-center justify-center" title="M5 价值晋升 (17%)">M5</div>
+            </div>
+
+            <!-- 数据表格（还原原图左侧表格） -->
+            <div class="overflow-x-auto">
+              <table class="w-full text-xs text-left">
+                <thead>
+                  <tr class="text-slate-400 border-b border-slate-100 font-semibold uppercase text-[10px] tracking-wider">
+                    <th class="py-2.5 px-3">模块</th>
+                    <th class="py-2.5 px-3">周次</th>
+                    <th class="py-2.5 px-3">课时</th>
+                    <th class="py-2.5 px-3 text-right">占比</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-100 font-medium text-slate-700">
+                  <tr class="hover:bg-slate-50 transition-colors">
+                    <td class="py-3 px-3 flex items-center gap-2 font-bold text-slate-900">
+                      <span class="w-2 h-2 rounded-full bg-blue-600"></span>
+                      M1 认知破局
+                    </td>
+                    <td class="py-3 px-3 text-slate-500 font-mono">W1</td>
+                    <td class="py-3 px-3 font-semibold">1h</td>
+                    <td class="py-3 px-3 text-right font-bold text-slate-900">8%</td>
+                  </tr>
+                  <tr class="hover:bg-slate-50 transition-colors">
+                    <td class="py-3 px-3 flex items-center gap-2 font-bold text-slate-900">
+                      <span class="w-2 h-2 rounded-full bg-emerald-600"></span>
+                      M2 读懂上级
+                    </td>
+                    <td class="py-3 px-3 text-slate-500 font-mono">W2-3</td>
+                    <td class="py-3 px-3 font-semibold">2h</td>
+                    <td class="py-3 px-3 text-right font-bold text-slate-900">17%</td>
+                  </tr>
+                  <tr class="hover:bg-slate-50 transition-colors bg-amber-50/30">
+                    <td class="py-3 px-3 flex items-center gap-2 font-bold text-amber-900">
+                      <span class="w-2 h-2 rounded-full bg-amber-700"></span>
+                      M3 汇报沟通 (核心重心)
+                    </td>
+                    <td class="py-3 px-3 text-amber-700 font-mono">W4-7</td>
+                    <td class="py-3 px-3 font-semibold text-amber-800">4h</td>
+                    <td class="py-3 px-3 text-right font-black text-amber-700">33%</td>
+                  </tr>
+                  <tr class="hover:bg-slate-50 transition-colors">
+                    <td class="py-3 px-3 flex items-center gap-2 font-bold text-slate-900">
+                      <span class="w-2 h-2 rounded-full bg-orange-700"></span>
+                      M4 期望边界
+                    </td>
+                    <td class="py-3 px-3 text-slate-500 font-mono">W8-9</td>
+                    <td class="py-3 px-3 font-semibold">2h</td>
+                    <td class="py-3 px-3 text-right font-bold text-slate-900">17%</td>
+                  </tr>
+                  <tr class="hover:bg-slate-50 transition-colors">
+                    <td class="py-3 px-3 flex items-center gap-2 font-bold text-slate-900">
+                      <span class="w-2 h-2 rounded-full bg-purple-600"></span>
+                      M5 价值晋升
+                    </td>
+                    <td class="py-3 px-3 text-slate-500 font-mono">W10-11</td>
+                    <td class="py-3 px-3 font-semibold">2h</td>
+                    <td class="py-3 px-3 text-right font-bold text-slate-900">17%</td>
+                  </tr>
+                  <tr class="hover:bg-slate-50 transition-colors">
+                    <td class="py-3 px-3 flex items-center gap-2 font-bold text-slate-900">
+                      <span class="w-2 h-2 rounded-full bg-green-600"></span>
+                      M6 综合实战
+                    </td>
+                    <td class="py-3 px-3 text-slate-500 font-mono">W12</td>
+                    <td class="py-3 px-3 font-semibold">1h</td>
+                    <td class="py-3 px-3 text-right font-bold text-slate-900">8%</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- 右侧：每周标准结构 (60分钟) -->
+          <div class="bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 shadow-xs">
+            <div class="flex items-center justify-between mb-5">
+              <h3 class="text-base font-bold text-slate-900 flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-emerald-600"></span>
+                每周标准结构（60分钟）
+              </h3>
+              <span class="text-xs text-slate-400 font-mono">Standard Class Routine</span>
+            </div>
+
+            <!-- 时间轴表格（还原原图右侧表格） -->
+            <div class="overflow-x-auto">
+              <table class="w-full text-xs text-left">
+                <thead>
+                  <tr class="text-slate-400 border-b border-slate-100 font-semibold uppercase text-[10px] tracking-wider">
+                    <th class="py-2.5 px-3">环节</th>
+                    <th class="py-2.5 px-3">时间</th>
+                    <th class="py-2.5 px-3">内容</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-100 font-medium text-slate-700">
+                  <tr class="hover:bg-slate-50 transition-colors">
+                    <td class="py-3 px-3 font-bold text-slate-900 flex items-center gap-2">
+                      <span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span>
+                      开场回顾
+                    </td>
+                    <td class="py-3 px-3 font-mono font-semibold text-slate-500">5min</td>
+                    <td class="py-3 px-3 text-slate-600">作业点评 + 场景导入</td>
+                  </tr>
+                  <tr class="hover:bg-slate-50 transition-colors bg-emerald-50/20">
+                    <td class="py-3 px-3 font-bold text-slate-900 flex items-center gap-2">
+                      <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                      知识讲解
+                    </td>
+                    <td class="py-3 px-3 font-mono font-bold text-emerald-700">25min</td>
+                    <td class="py-3 px-3 font-semibold text-slate-800">概念、方法论、框架</td>
+                  </tr>
+                  <tr class="hover:bg-slate-50 transition-colors">
+                    <td class="py-3 px-3 font-bold text-slate-900 flex items-center gap-2">
+                      <span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
+                      案例拆解
+                    </td>
+                    <td class="py-3 px-3 font-mono font-semibold text-slate-500">15min</td>
+                    <td class="py-3 px-3 text-slate-600">大厂真实场景分析</td>
+                  </tr>
+                  <tr class="hover:bg-slate-50 transition-colors">
+                    <td class="py-3 px-3 font-bold text-slate-900 flex items-center gap-2">
+                      <span class="w-1.5 h-1.5 rounded-full bg-purple-500"></span>
+                      工具练习
+                    </td>
+                    <td class="py-3 px-3 font-mono font-semibold text-slate-500">10min</td>
+                    <td class="py-3 px-3 text-slate-600">模板 / 话术 / 角色扮演</td>
+                  </tr>
+                  <tr class="hover:bg-slate-50 transition-colors">
+                    <td class="py-3 px-3 font-bold text-slate-900 flex items-center gap-2">
+                      <span class="w-1.5 h-1.5 rounded-full bg-rose-500"></span>
+                      课后行动
+                    </td>
+                    <td class="py-3 px-3 font-mono font-semibold text-slate-500">5min</td>
+                    <td class="py-3 px-3 text-slate-600">作业说明 + 下周预告</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- 60分钟时钟进度比例条 -->
+            <div class="mt-6 p-4 rounded-2xl bg-slate-50 border border-slate-200">
+              <div class="text-[11px] font-bold text-slate-500 mb-2 flex justify-between">
+                <span>60分钟沉浸式课堂时间流分配</span>
+                <span class="text-blue-600 font-mono">100% 满课闭环</span>
+              </div>
+              <div class="h-3 w-full rounded-full overflow-hidden flex shadow-inner">
+                <div class="bg-blue-500 h-full" style="width: 8%" title="开场回顾 5min (8%)"></div>
+                <div class="bg-emerald-500 h-full" style="width: 42%" title="知识讲解 25min (42%)"></div>
+                <div class="bg-amber-500 h-full" style="width: 25%" title="案例拆解 15min (25%)"></div>
+                <div class="bg-purple-500 h-full" style="width: 17%" title="工具练习 10min (17%)"></div>
+                <div class="bg-rose-500 h-full" style="width: 8%" title="课后行动 5min (8%)"></div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 12周全景课表与知识系统（还原原图 1/5, 2/5, 3/5） -->
+    <section id="curriculum" class="py-12 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <!-- 标题区 -->
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
+          <div>
+            <span class="text-xs font-bold text-blue-600 uppercase tracking-widest">Master Curriculum</span>
+            <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-1">12 周全景课表与大厂实操库</h2>
+            <p class="text-xs sm:text-sm text-slate-500 mt-1">点击任意周次可展开查看深度教案、正反案例对照及高情商话术库</p>
+          </div>
+
+          <!-- 搜索框 -->
+          <div class="relative w-full md:w-72">
+            <input type="text" id="search-input" placeholder="搜索周次/知识点/话术/场景..." class="w-full text-xs pl-9 pr-4 py-2.5 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-slate-50 focus:bg-white transition-all">
+            <svg class="w-4 h-4 text-slate-400 absolute left-3 top-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+          </div>
+        </div>
+
+        <!-- 筛选栏：月度切换 Tab + 模块过滤 -->
+        <div class="space-y-4 mb-8">
+          <!-- 月度切换 Tab -->
+          <div class="flex flex-wrap items-center gap-2 p-1.5 rounded-2xl bg-slate-100/80 border border-slate-200">
+            <button class="month-filter-btn px-4 py-2 rounded-xl text-xs font-bold transition-all bg-blue-600 text-white shadow" data-month="0">
+              全部 12 周
+            </button>
+            <button class="month-filter-btn px-4 py-2 rounded-xl text-xs font-bold transition-all bg-white text-slate-600 hover:text-slate-900" data-month="1">
+              第1月：认知与读懂 (W1-W4)
+            </button>
+            <button class="month-filter-btn px-4 py-2 rounded-xl text-xs font-bold transition-all bg-white text-slate-600 hover:text-slate-900" data-month="2">
+              第2月：沟通与边界 (W5-W8)
+            </button>
+            <button class="month-filter-btn px-4 py-2 rounded-xl text-xs font-bold transition-all bg-white text-slate-600 hover:text-slate-900" data-month="3">
+              第3月：价值与晋升 (W9-W12)
+            </button>
+          </div>
+
+          <!-- 模块单选筛选器 -->
+          <div id="module-filters" class="flex flex-wrap items-center gap-2"></div>
+        </div>
+
+        <!-- 12周卡片网格容器 -->
+        <div id="weeks-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6"></div>
+
+      </div>
+    </section>
+
+    <!-- 交互式实战工具箱 (Toolkits) -->
+    <section id="toolkits" class="py-14 bg-slate-100/70 border-t border-slate-200">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="text-center max-w-2xl mx-auto mb-10">
+          <span class="text-xs font-bold text-blue-600 uppercase tracking-widest">Interactive Toolkits</span>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-1">向上管理实战工具箱</h2>
+          <p class="text-xs sm:text-sm text-slate-500 mt-1.5">开箱即用的自测问卷、领导类型攻防、报忧生成器与一页纸决策模板</p>
+        </div>
+
+        <!-- 工具 Tab 切换 -->
+        <div class="flex flex-wrap items-center justify-center gap-2 mb-8">
+          <button onclick="switchToolTab('quiz')" data-tab="quiz" class="tool-tab-btn px-4 py-2.5 rounded-xl text-xs font-bold border transition-all bg-blue-600 text-white shadow-sm flex items-center gap-1.5">
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <span>10min 成熟度自测评</span>
+          </button>
+
+          <button onclick="switchToolTab('leaderTypes')" data-tab="leaderTypes" class="tool-tab-btn px-4 py-2.5 rounded-xl text-xs font-bold border transition-all bg-white text-slate-700 hover:border-slate-300 flex items-center gap-1.5">
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+            </svg>
+            <span>5类上级画像与攻防锦囊</span>
+          </button>
+
+          <button onclick="switchToolTab('badNews')" data-tab="badNews" class="tool-tab-btn px-4 py-2.5 rounded-xl text-xs font-bold border transition-all bg-white text-slate-700 hover:border-slate-300 flex items-center gap-1.5">
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+            </svg>
+            <span>4步报忧话术生成器</span>
+          </button>
+
+          <button onclick="switchToolTab('onePager')" data-tab="onePager" class="tool-tab-btn px-4 py-2.5 rounded-xl text-xs font-bold border transition-all bg-white text-slate-700 hover:border-slate-300 flex items-center gap-1.5">
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+            </svg>
+            <span>向上1页纸决策模板</span>
+          </button>
+
+          <button onclick="switchToolTab('refuseDict')" data-tab="refuseDict" class="tool-tab-btn px-4 py-2.5 rounded-xl text-xs font-bold border transition-all bg-white text-slate-700 hover:border-slate-300 flex items-center gap-1.5">
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636" />
+            </svg>
+            <span>5大建设性拒绝字典</span>
+          </button>
+        </div>
+
+        <!-- 面板容器 -->
+        <div class="tool-panel" id="panel-quiz">
+          <div id="quiz-container"></div>
+        </div>
+
+        <div class="tool-panel hidden" id="panel-leaderTypes">
+          <div id="leader-types-container"></div>
+        </div>
+
+        <div class="tool-panel hidden" id="panel-badNews">
+          <div id="bad-news-container"></div>
+        </div>
+
+        <div class="tool-panel hidden" id="panel-onePager">
+          <div id="one-pager-container"></div>
+        </div>
+
+        <div class="tool-panel hidden" id="panel-refuseDict">
+          <div id="refuse-dict-container"></div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 能力4级模型与终身精进闭环（对应原图 W12 知识体系） -->
+    <section id="pyramid" class="py-14 bg-white border-t border-slate-200">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="text-center max-w-2xl mx-auto mb-12">
+          <span class="text-xs font-bold text-blue-600 uppercase tracking-widest">Mastery & Evolution</span>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-1">能力 4 级进阶金字塔</h2>
+          <p class="text-xs sm:text-sm text-slate-500 mt-1.5">从被动执行到战略合伙，看清你在大厂职场所处的高地</p>
+        </div>
+
+        <!-- 4级进阶卡片 -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-12">
+          
+          <div class="p-5 rounded-2xl border border-slate-200 bg-slate-50 flex flex-col justify-between">
+            <div>
+              <div class="text-xs font-black text-slate-400 mb-1">LEVEL 01</div>
+              <h4 class="text-base font-bold text-slate-900 mb-2">被动响应级</h4>
+              <p class="text-xs text-slate-500 leading-relaxed mb-3">推一下动一下，拨一拨转一转。缺乏对大局的感知，把周报当流水账应付。</p>
+            </div>
+            <div class="text-[11px] font-semibold text-slate-400 pt-2 border-t border-slate-200">
+              大厂定位：基础执行螺丝钉
+            </div>
+          </div>
+
+          <div class="p-5 rounded-2xl border border-blue-200 bg-blue-50/50 flex flex-col justify-between">
+            <div>
+              <div class="text-xs font-black text-blue-600 mb-1">LEVEL 02</div>
+              <h4 class="text-base font-bold text-blue-950 mb-2">主动协同级</h4>
+              <p class="text-xs text-blue-800 leading-relaxed mb-3">按时高质量交付，遇到风险及时同步，懂得主动消除上下级信息差，不让领导焦虑。</p>
+            </div>
+            <div class="text-[11px] font-semibold text-blue-700 pt-2 border-t border-blue-200">
+              大厂定位：合格靠谱业务骨干
+            </div>
+          </div>
+
+          <div class="p-5 rounded-2xl border border-emerald-200 bg-emerald-50/50 flex flex-col justify-between">
+            <div>
+              <div class="text-xs font-black text-emerald-600 mb-1">LEVEL 03</div>
+              <h4 class="text-base font-bold text-emerald-950 mb-2">敏锐预判级</h4>
+              <p class="text-xs text-emerald-800 leading-relaxed mb-3">永远比上级多想两步。汇报时带两个方案并给出倾向性建议，懂得条件化争取资源。</p>
+            </div>
+            <div class="text-[11px] font-semibold text-emerald-700 pt-2 border-t border-emerald-200">
+              大厂定位：核心项目一号位 / 准专家
+            </div>
+          </div>
+
+          <div class="p-5 rounded-2xl border border-purple-200 bg-purple-50/50 flex flex-col justify-between shadow-xs">
+            <div>
+              <div class="text-xs font-black text-purple-600 mb-1">LEVEL 04</div>
+              <h4 class="text-base font-bold text-purple-950 mb-2">价值共创级</h4>
+              <p class="text-xs text-purple-800 leading-relaxed mb-3">与上级成为战略合伙人。深度读懂高管大局，跨部门影响力侧翼溢出，互相成就大厂战功。</p>
+            </div>
+            <div class="text-[11px] font-semibold text-purple-700 pt-2 border-t border-purple-200">
+              大厂定位：组织核心高潜 / 业务掌舵人
+            </div>
+          </div>
+
+        </div>
+
+        <!-- 精进 3 习惯 -->
+        <div class="bg-slate-900 text-white rounded-3xl p-6 sm:p-8">
+          <div class="max-w-3xl">
+            <span class="text-xs font-bold text-amber-400 uppercase tracking-widest">Lifelong Growth</span>
+            <h3 class="text-xl font-bold mt-1 mb-2">向上管理精进 3 习惯 (W12 终身心法)</h3>
+            <p class="text-xs text-slate-400 leading-relaxed mb-6">卓越的职场影响力不是靠一时的技巧，而是靠日复一日建立的确定性与复盘机制。</p>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <div class="bg-slate-800/80 p-4 rounded-xl border border-slate-700">
+                <span class="text-amber-400 font-bold text-xs block mb-1">1. 周复盘 (Weekly Review)</span>
+                <p class="text-xs text-slate-300 leading-relaxed">每周五检视本周信任账户余额：哪件事超预期？哪件事产生了信息差？下周如何调频？</p>
+              </div>
+
+              <div class="bg-slate-800/80 p-4 rounded-xl border border-slate-700">
+                <span class="text-emerald-400 font-bold text-xs block mb-1">2. 季度画像 (Quarterly Refresh)</span>
+                <p class="text-xs text-slate-300 leading-relaxed">每Q重新校准直接主管的核心战功诉求、同侪竞争态势与组织杠杆变化，重新对齐OKR。</p>
+              </div>
+
+              <div class="bg-slate-800/80 p-4 rounded-xl border border-slate-700">
+                <span class="text-blue-400 font-bold text-xs block mb-1">3. 年度盘点 (Annual Map)</span>
+                <p class="text-xs text-slate-300 leading-relaxed">以高阶STAR法则梳理个人年度价值地图，提炼个人专业壁垒标签，为晋升述职储备充分弹药。</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- 原图画廊 Modal 弹窗 -->
+  <div id="gallery-modal" class="fixed inset-0 z-50 bg-slate-900/80 backdrop-blur-xs flex items-center justify-center p-4 hidden">
+    <div class="bg-white rounded-3xl max-w-5xl w-full max-h-[92vh] overflow-y-auto p-6 sm:p-8 shadow-2xl relative fade-in">
+      <button onclick="closeConceptGallery()" class="absolute top-5 right-5 p-2 rounded-full text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-colors">
+        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+
+      <div class="mb-6">
+        <span class="text-xs font-bold text-blue-600 uppercase tracking-widest">Original Reference</span>
+        <h3 class="text-xl font-bold text-slate-900 mt-0.5">向上管理概念设计高清原图</h3>
+        <p class="text-xs text-slate-500 mt-1">课程系统完整基于以下4张大厂向上管理实战图鉴开发实现</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="border border-slate-200 rounded-2xl overflow-hidden bg-slate-50">
+          <div class="p-2.5 bg-slate-100 text-xs font-bold text-slate-700 flex justify-between items-center">
+            <span>1/5 · 第1月：认知与读懂</span>
+            <span class="text-[10px] text-slate-400">W1-W4 课表与心法</span>
+          </div>
+          <img src="assets/images/concept/month1-cognition.jpg" alt="第1月：认知与读懂" class="w-full h-auto object-cover hover:scale-105 transition-transform duration-300">
+        </div>
+
+        <div class="border border-slate-200 rounded-2xl overflow-hidden bg-slate-50">
+          <div class="p-2.5 bg-slate-100 text-xs font-bold text-slate-700 flex justify-between items-center">
+            <span>2/5 · 第2月：沟通与边界</span>
+            <span class="text-[10px] text-slate-400">W5-W8 汇报与对齐</span>
+          </div>
+          <img src="assets/images/concept/month2-communication.jpg" alt="第2月：沟通与边界" class="w-full h-auto object-cover hover:scale-105 transition-transform duration-300">
+        </div>
+
+        <div class="border border-slate-200 rounded-2xl overflow-hidden bg-slate-50">
+          <div class="p-2.5 bg-slate-100 text-xs font-bold text-slate-700 flex justify-between items-center">
+            <span>3/5 · 第3月：价值与晋升</span>
+            <span class="text-[10px] text-slate-400">W9-W12 拒绝与述职</span>
+          </div>
+          <img src="assets/images/concept/month3-value.jpg" alt="第3月：价值与晋升" class="w-full h-auto object-cover hover:scale-105 transition-transform duration-300">
+        </div>
+
+        <div class="border border-slate-200 rounded-2xl overflow-hidden bg-slate-50">
+          <div class="p-2.5 bg-slate-100 text-xs font-bold text-slate-700 flex justify-between items-center">
+            <span>4/5 · 课程设计说明</span>
+            <span class="text-[10px] text-slate-400">模块分布与60min结构</span>
+          </div>
+          <img src="assets/images/concept/course-design-overview.jpg" alt="课程设计说明" class="w-full h-auto object-cover hover:scale-105 transition-transform duration-300">
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 全局实战教案 Modal 弹窗 -->
+  <div id="detail-modal" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4 hidden">
+    <div class="bg-white rounded-3xl max-w-3xl w-full max-h-[90vh] overflow-y-auto p-6 sm:p-8 shadow-2xl relative fade-in">
+      <button id="close-modal-btn" class="absolute top-5 right-5 p-2 rounded-full text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-colors">
+        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+      <div id="modal-body"></div>
+    </div>
+  </div>
+
+  <!-- Toast 提示条 -->
+  <div id="toast" class="fixed bottom-6 right-6 z-50 px-4 py-2.5 rounded-xl bg-slate-900 text-white text-xs font-semibold shadow-xl transition-all duration-300 opacity-0 pointer-events-none translate-y-2 flex items-center gap-2"></div>
+
+  <!-- 页脚 Footer -->
+  <footer class="bg-slate-50 border-t border-slate-200 py-10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-xs text-slate-500">
+      <div class="flex items-center justify-center gap-2 mb-2">
+        <span class="font-bold text-slate-800">互联网大厂向上管理课程体系</span>
+        <span>·</span>
+        <span>12周高维职场进阶实战</span>
+      </div>
+      <p class="text-slate-400 text-[11px]">基于大厂真实业务协同与组织心理学构建 · 持续精进 · 价值共创</p>
+    </div>
+  </footer>
+
+  <!-- 引入课程核心数据与应用逻辑 -->
+  <script src="js/course-data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
